@@ -1,15 +1,20 @@
 import js from '@eslint/js';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import globals from 'globals';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 
+const rootDirectory = dirname(fileURLToPath(import.meta.url));
+
 export default [
   {
-    ignores: ['dist/**', 'coverage/**']
+    ignores: ['dist/**', 'coverage/**', 'apps/yml-generator/dist/**']
   },
   js.configs.recommended,
   {
-    files: ['**/*.{js,mjs,ts}'],
+    files: ['**/*.{js,mjs,ts,tsx}'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -19,11 +24,12 @@ export default [
     }
   },
   {
-    files: ['**/*.ts'],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: './tsconfig.json',
+        project: ['./tsconfig.json', './apps/yml-generator/tsconfig.json'],
+        tsconfigRootDir: rootDirectory,
         sourceType: 'module'
       }
     },
