@@ -76,6 +76,10 @@ npm run dry-run -- --config ./config/runtime.yml --webhook transfer-alert --fixt
 
 ## Docs
 
+- [Agent Guide](./AGENTS.md)
+- [Agent Workflows](./docs/agents.md)
 - [Configuration](./docs/configuration.md)
 - [Templates](./docs/templates.md)
 - [Security](./docs/security.md)
+
+The repository also includes checked-in agent instructions so coding agents and operator agents can work from the same public guidance.
