@@ -1,0 +1,19 @@
+version: 1
+network: main
+nodeUrl: https://mainnet.vechain.org
+server:
+  port: 8080
+processing:
+  confirmations: 12
+  replayWindowBlocks: 64
+delivery:
+  requestTimeoutMs: 10000
+  maxAttempts: 5
+  initialBackoffMs: 1000
+  maxBackoffMs: 16000
+  defaultHeaders:
+    x-powered-by: vechain.energy/webhooks
+  signing:
+    defaultEnabled: false
+    header: x-webhook-signature
+logLevel: info

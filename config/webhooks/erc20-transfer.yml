@@ -1,0 +1,36 @@
+version: 1
+id: erc20-transfer
+enabled: true
+description: Forward VTHO ERC-20 Transfer events on VeChain mainnet to a local receiver.
+match:
+  kind: event
+  addresses:
+    - "0x0000000000000000000000000000456e65726779"
+  event:
+    name: Transfer
+    abi:
+      file: ../abis/erc20-transfer.json
+decode:
+  fields:
+    value:
+      format: ether
+filters:
+  - field: decoded.value
+    op: gt
+    value: "0"
+request:
+  method: POST
+  url: http://receiver:3000/webhooks/erc20-transfer
+  contentType: application/json
+  body: |
+    {
+      "webhookId": "{{webhook.id}}",
+      "network": "{{network.name}}",
+      "from": "{{decoded.from}}",
+      "to": "{{decoded.to}}",
+      "value": "{{decoded.value}}",
+      "txId": "{{meta.txID}}"
+    }
+  signing:
+    enabled: true
+    secretEnv: WEBHOOK_SIGNATURE_SECRET

@@ -1,0 +1,18 @@
+version: 1
+id: transaction-alert
+enabled: false
+description: Forward transactions from a watched origin.
+match:
+  kind: transaction
+  addresses:
+    - "0x0000000000000000000000000000456e65726779"
+request:
+  method: POST
+  url: http://receiver:3000/webhooks/transaction
+  contentType: application/json
+  body: |
+    {
+      "origin": "{{decoded.origin}}",
+      "gas": "{{decoded.gas}}",
+      "txId": "{{meta.txID}}"
+    }

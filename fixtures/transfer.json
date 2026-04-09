@@ -1,0 +1,28 @@
+{
+  "kind": "transfer",
+  "event": {
+    "sender": "0x0000000000000000000000000000456e65726779",
+    "recipient": "0x0000000000000000000000000000000000000001",
+    "amount": "1000000000000000000",
+    "meta": {
+      "blockID": "0xabc",
+      "blockNumber": 1,
+      "blockTimestamp": 1,
+      "txID": "0xtx",
+      "txOrigin": "0x0000000000000000000000000000456e65726779",
+      "candidateId": "transfer:0xtx:0:0",
+      "clauseIndex": 0,
+      "transferIndex": 0
+    }
+  },
+  "meta": {
+    "blockID": "0xabc",
+    "blockNumber": 1,
+    "blockTimestamp": 1,
+    "txID": "0xtx",
+    "txOrigin": "0x0000000000000000000000000000456e65726779",
+    "candidateId": "transfer:0xtx:0:0",
+    "clauseIndex": 0,
+    "transferIndex": 0
+  }
+}

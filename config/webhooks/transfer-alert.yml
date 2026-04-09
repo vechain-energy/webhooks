@@ -1,0 +1,23 @@
+version: 1
+id: transfer-alert
+enabled: false
+description: Forward native VET transfers when a watched address appears as sender or recipient.
+match:
+  kind: transfer
+  addresses:
+    - "0x0000000000000000000000000000456e65726779"
+filters:
+  - field: decoded.amount
+    op: gt
+    value: "0"
+request:
+  method: POST
+  url: http://receiver:3000/webhooks/transfer
+  contentType: application/json
+  body: |
+    {
+      "from": "{{decoded.from}}",
+      "to": "{{decoded.to}}",
+      "amount": "{{decoded.amount}}",
+      "txId": "{{meta.txID}}"
+    }

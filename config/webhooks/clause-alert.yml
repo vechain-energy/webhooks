@@ -1,0 +1,19 @@
+version: 1
+id: clause-alert
+enabled: false
+description: Forward clauses targeting a watched contract.
+match:
+  kind: clause
+  addresses:
+    - "0x0000000000000000000000000000456e65726779"
+request:
+  method: POST
+  url: http://receiver:3000/webhooks/clause
+  contentType: application/json
+  body: |
+    {
+      "to": "{{decoded.to}}",
+      "value": "{{decoded.value}}",
+      "clauseIndex": "{{decoded.clauseIndex}}",
+      "txId": "{{meta.txID}}"
+    }

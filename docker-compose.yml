@@ -1,0 +1,26 @@
+services:
+  processor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      WEBHOOKS_RUNTIME_CONFIG: /app/config/runtime.yml
+      WEBHOOK_SIGNATURE_SECRET: ${WEBHOOK_SIGNATURE_SECRET:-change-me}
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/ready').then((response) => { process.exit(response.ok ? 0 : 1); }).catch(() => process.exit(1));"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  receiver:
+    image: node:24-alpine
+    profiles: ["receiver"]
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: ["node", "examples/receiver/server.mjs"]
+    ports:
+      - "3000:3000"

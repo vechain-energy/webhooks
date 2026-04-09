@@ -1,0 +1,18 @@
+version: 1
+id: transfer-alert
+enabled: true
+match:
+  kind: transfer
+  addresses:
+    - "0x0000000000000000000000000000456e65726779"
+request:
+  method: POST
+  url: https://example.com/webhooks/transfer
+  contentType: application/json
+  body: |
+    {
+      "from": "{{decoded.from}}",
+      "to": "{{decoded.to}}",
+      "amount": "{{decoded.amount}}",
+      "txId": "{{meta.txID}}"
+    }
