@@ -1,5 +1,6 @@
 node_modules
 dist
 coverage
+apps/yml-generator/dist
 .env
 .DS_Store
